@@ -20,7 +20,7 @@ export default function NavigationItemsCreate() {
     };
 
     return (
-        <AppLayout breadcrumbs={[{ title: 'Administration', href: '/admin' }, { title: 'Navigation', href: '/admin/navigation-items' }, { title: 'Create', href: '/admin/navigation-items/create' }]}>
+        <AppLayout breadcrumbs={[{ title: 'Navigation', href: '/admin/navigation-items' }, { title: 'Create', href: '/admin/navigation-items/create' }]}>
             <Head title="Create Navigation Item" />
 
             <div className="p-4 space-y-4">

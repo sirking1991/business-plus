@@ -8,7 +8,7 @@ export default function NavigationItemsIndex({ items, filters }: { items: any; f
     const page = usePage();
 
     return (
-        <AppLayout breadcrumbs={[{ title: 'Administration', href: '/admin' }, { title: 'Navigation', href: '/admin/navigation-items' }]}>
+        <AppLayout breadcrumbs={[{ title: 'Navigation', href: '/admin/navigation-items' }]}>
             <Head title="Navigation" />
 
             <div className="p-4 space-y-4">

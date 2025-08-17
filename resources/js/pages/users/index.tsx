@@ -8,7 +8,7 @@ export default function UsersIndex({ users, filters }: { users: any; filters?: a
     const page = usePage();
 
     return (
-        <AppLayout breadcrumbs={[{ title: 'Administration', href: '/admin' }, { title: 'Users', href: '/admin/users' }]}>
+        <AppLayout breadcrumbs={[{ title: 'Users', href: '/admin/users' }]}>
             <Head title="Users" />
 
             <div className="p-4 space-y-4">

@@ -28,7 +28,7 @@ export default function UsersEdit({ user }: { user: any }) {
     };
 
     return (
-        <AppLayout breadcrumbs={[{ title: 'Administration', href: '/admin' }, { title: 'Users', href: '/admin/users' }, { title: user.name, href: `/admin/users/${user.id}/edit` }]}>
+        <AppLayout breadcrumbs={[ { title: 'Users', href: '/admin/users' }, { title: user.name, href: `/admin/users/${user.id}/edit` }]}>
             <Head title={`Edit ${user.name}`} />
 
             <div className="p-4 space-y-4">

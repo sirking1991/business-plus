@@ -17,7 +17,7 @@ export default function UsersCreate() {
     };
 
     return (
-        <AppLayout breadcrumbs={[{ title: 'Administration', href: '/admin' }, { title: 'Users', href: '/admin/users' }, { title: 'Create', href: '/admin/users/create' }]}>
+        <AppLayout breadcrumbs={[{ title: 'Users', href: '/admin/users' }, { title: 'Create', href: '/admin/users/create' }]}>
             <Head title="Create User" />
 
             <div className="p-4 space-y-4">

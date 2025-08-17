@@ -34,7 +34,7 @@ export default function NavigationItemsEdit({ item }: { item: any }) {
     };
 
     return (
-        <AppLayout breadcrumbs={[{ title: 'Administration', href: '/admin' }, { title: 'Navigation', href: '/admin/navigation-items' }, { title: item.title, href: `/admin/navigation-items/${item.id}/edit` }]}>
+        <AppLayout breadcrumbs={[{ title: 'Navigation', href: '/admin/navigation-items' }, { title: item.title, href: `/admin/navigation-items/${item.id}/edit` }]}>
             <Head title={`Edit ${item.title}`} />
 
             <div className="p-4 space-y-4">
