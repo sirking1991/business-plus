@@ -4,18 +4,20 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, D
 import { Trash2 } from 'lucide-react';
 import useCan from '@/hooks/use-can';
 
-export default function UsersEdit({ user }: { user: any }) {
+export default function UsersEdit({ user, roles }: { user: any; roles: any[] }) {
     const can = useCan();
     const { data, setData, put, processing, errors, delete: destroy } = useForm<{
         name: string;
         email: string;
         password: string;
         password_confirmation: string;
+        roles: string[];
     }>({
         name: user.name ?? '',
         email: user.email ?? '',
         password: '',
         password_confirmation: '',
+        roles: user.roles ?? [],
     });
 
     const submit = (e: React.FormEvent) => {
@@ -74,13 +76,48 @@ export default function UsersEdit({ user }: { user: any }) {
                     </div>
                     <div>
                         <label className="block text-sm">Password (leave blank to keep current)</label>
-                        <input type="password" value={data.password} onChange={(e) => setData('password', e.target.value)} className="w-full rounded border px-2 py-1" />
+                        <input 
+                            type="password" 
+                            value={data.password} 
+                            onChange={(e) => setData('password', e.target.value)} 
+                            className="w-full rounded border px-2 py-1" 
+                            autoComplete="new-password"
+                        />
                         {errors.password && <div className="text-red-600 text-xs">{errors.password}</div>}
                     </div>
                     <div>
                         <label className="block text-sm">Confirm Password</label>
-                        <input type="password" value={data.password_confirmation} onChange={(e) => setData('password_confirmation', e.target.value)} className="w-full rounded border px-2 py-1" />
+                        <input 
+                            type="password" 
+                            value={data.password_confirmation} 
+                            onChange={(e) => setData('password_confirmation', e.target.value)} 
+                            className="w-full rounded border px-2 py-1" 
+                            autoComplete="new-password"
+                        />
                         {errors.password_confirmation && <div className="text-red-600 text-xs">{errors.password_confirmation}</div>}
+                    </div>
+                    <div>
+                        <label className="block text-sm mb-2">Roles</label>
+                        <div className="space-y-2">
+                            {roles.map((role) => (
+                                <label key={role.id} className="flex items-center space-x-2">
+                                    <input
+                                        type="checkbox"
+                                        checked={data.roles.includes(role.name)}
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                setData('roles', [...data.roles, role.name]);
+                                            } else {
+                                                setData('roles', data.roles.filter(r => r !== role.name));
+                                            }
+                                        }}
+                                        className="rounded border"
+                                    />
+                                    <span className="text-sm">{role.name}</span>
+                                </label>
+                            ))}
+                        </div>
+                        {errors.roles && <div className="text-red-600 text-xs">{errors.roles}</div>}
                     </div>
                 </Form>
             </div>

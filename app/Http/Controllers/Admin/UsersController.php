@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -78,12 +79,21 @@ class UsersController extends Controller
 
     public function edit(User $user): Response
     {
+        $user->load('roles');
+        
+        $roles = Role::all()->map(fn (Role $role) => [
+            'id' => $role->id,
+            'name' => $role->name,
+        ]);
+
         return Inertia::render('users/edit', [
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
+                'roles' => $user->roles->pluck('name')->toArray(),
             ],
+            'roles' => $roles,
         ]);
     }
 
@@ -97,6 +107,11 @@ class UsersController extends Controller
         }
 
         $user->update($data);
+
+        // Handle role assignment
+        if (isset($data['roles'])) {
+            $user->syncRoles($data['roles']);
+        }
 
         return redirect()->route('admin.users.edit', $user)->with('success', 'User updated.');
     }
