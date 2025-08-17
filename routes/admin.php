@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\NavigationItemsController;
 use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])

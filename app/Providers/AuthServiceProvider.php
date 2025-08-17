@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\User;
-use App\Policies\UserPolicy;
 use App\Models\NavigationItem;
+use App\Models\User;
 use App\Policies\NavigationItemPolicy;
 use App\Policies\RolePolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Role;
@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // Admins bypass all authorization checks
-        Gate::before(function (User $user, string $ability = null) {
+        Gate::before(function (User $user, ?string $ability = null) {
             return $user->is_admin ? true : null;
         });
     }

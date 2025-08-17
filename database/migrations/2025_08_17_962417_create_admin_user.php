@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -16,7 +16,7 @@ return new class extends Migration
         $email = 'admin@example.com';
 
         // Create admin user if not exists
-        if (!DB::table('users')->where('email', $email)->exists()) {
+        if (! DB::table('users')->where('email', $email)->exists()) {
             $userId = DB::table('users')->insertGetId([
                 'name' => 'Administrator',
                 'email' => $email,
@@ -31,7 +31,7 @@ return new class extends Migration
             // Only proceed if roles table exists
             if (Schema::hasTable('roles')) {
                 // Create roles and permissions
-                if (!DB::table('roles')->where('name', 'admin')->exists()) {
+                if (! DB::table('roles')->where('name', 'admin')->exists()) {
                     DB::table('roles')->insert([
                         'name' => 'admin',
                         'guard_name' => 'web',
@@ -55,7 +55,7 @@ return new class extends Migration
                 }
 
                 foreach ($permissions as $permission) {
-                    if (!DB::table('permissions')->where('name', $permission)->exists()) {
+                    if (! DB::table('permissions')->where('name', $permission)->exists()) {
                         DB::table('permissions')->insert([
                             'name' => $permission,
                             'guard_name' => 'web',
@@ -71,7 +71,7 @@ return new class extends Migration
                 foreach ($permissions as $permission) {
                     $permissionId = DB::table('permissions')->where('name', $permission)->value('id');
 
-                    if (!DB::table('role_has_permissions')->where('role_id', $roleId)->where('permission_id', $permissionId)->exists()) {
+                    if (! DB::table('role_has_permissions')->where('role_id', $roleId)->where('permission_id', $permissionId)->exists()) {
                         DB::table('role_has_permissions')->insert([
                             'role_id' => $roleId,
                             'permission_id' => $permissionId,
@@ -80,7 +80,7 @@ return new class extends Migration
                 }
 
                 // Assign role to user
-                if (!DB::table('model_has_roles')->where('model_id', $userId)->where('role_id', $roleId)->exists()) {
+                if (! DB::table('model_has_roles')->where('model_id', $userId)->where('role_id', $roleId)->exists()) {
                     DB::table('model_has_roles')->insert([
                         'role_id' => $roleId,
                         'model_type' => 'App\\Models\\User',

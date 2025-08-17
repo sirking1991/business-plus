@@ -80,7 +80,7 @@ class UsersController extends Controller
     public function edit(User $user): Response
     {
         $user->load('roles');
-        
+
         $roles = Role::all()->map(fn (Role $role) => [
             'id' => $role->id,
             'name' => $role->name,
@@ -100,7 +100,7 @@ class UsersController extends Controller
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $data = $request->validated();
-        if (!empty($data['password'])) {
+        if (! empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         } else {
             unset($data['password']);

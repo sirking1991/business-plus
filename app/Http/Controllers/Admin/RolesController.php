@@ -9,8 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesController extends Controller
 {
@@ -65,13 +65,13 @@ class RolesController extends Controller
     public function store(RoleStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        
+
         $role = Role::create([
             'name' => $data['name'],
             'guard_name' => $data['guard_name'] ?? 'web',
         ]);
 
-        if (!empty($data['permissions'])) {
+        if (! empty($data['permissions'])) {
             $role->syncPermissions($data['permissions']);
         }
 
@@ -101,7 +101,7 @@ class RolesController extends Controller
     public function edit(Role $role): Response
     {
         $role->load('permissions');
-        
+
         $permissions = Permission::all()->map(fn (Permission $permission) => [
             'id' => $permission->id,
             'name' => $permission->name,
@@ -122,7 +122,7 @@ class RolesController extends Controller
     public function update(RoleUpdateRequest $request, Role $role): RedirectResponse
     {
         $data = $request->validated();
-        
+
         $role->update([
             'name' => $data['name'],
             'guard_name' => $data['guard_name'] ?? 'web',

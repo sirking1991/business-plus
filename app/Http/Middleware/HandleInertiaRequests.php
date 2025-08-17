@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\NavigationItem;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
-use App\Models\NavigationItem;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -57,6 +57,7 @@ class HandleInertiaRequests extends Middleware
                 if (! $item->permission) {
                     return true;
                 }
+
                 return $aclReady ? (bool) $request->user()?->can($item->permission) : false;
             });
 
