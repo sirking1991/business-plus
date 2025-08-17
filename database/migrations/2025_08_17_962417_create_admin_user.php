@@ -22,6 +22,7 @@ return new class extends Migration
                 'email' => $email,
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'),
+                'is_admin' => true,
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -87,6 +88,9 @@ return new class extends Migration
                     ]);
                 }
             }
+        } else {
+            // Ensure existing admin email has is_admin flag set
+            DB::table('users')->where('email', $email)->update(['is_admin' => true, 'updated_at' => now()]);
         }
     }
 

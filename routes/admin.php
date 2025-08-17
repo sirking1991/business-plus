@@ -1,0 +1,14 @@
+<?php
+
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\NavigationItemsController;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware(['auth', 'verified'])
+    ->prefix('admin')
+    ->as('admin.')
+    ->group(function () {
+        Route::redirect('/', '/admin/users')->name('home');
+        Route::resource('users', UsersController::class)->except(['show']);
+        Route::resource('navigation-items', NavigationItemsController::class)->except(['show']);
+    });

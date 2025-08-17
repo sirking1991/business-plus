@@ -6,11 +6,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles {
+        HasRoles::hasRole as protected spatieHasRole;
+        HasRoles::hasAnyRole as protected spatieHasAnyRole;
+        HasRoles::hasAllRoles as protected spatieHasAllRoles;
+        HasRoles::hasPermissionTo as protected spatieHasPermissionTo;
+        HasRoles::hasAnyPermission as protected spatieHasAnyPermission;
+        HasRoles::hasAllPermissions as protected spatieHasAllPermissions;
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -43,6 +52,38 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
+    }
+
+    // --- Admin bypass for Spatie permission/role checks ---
+    public function hasRole($roles, ?string $guard = null): bool
+    {
+        return (bool) $this->is_admin || $this->spatieHasRole($roles, $guard);
+    }
+
+    public function hasAnyRole(...$roles): bool
+    {
+        return (bool) $this->is_admin || $this->spatieHasAnyRole(...$roles);
+    }
+
+    public function hasAllRoles(...$roles): bool
+    {
+        return (bool) $this->is_admin || $this->spatieHasAllRoles(...$roles);
+    }
+
+    public function hasPermissionTo($permission, $guardName = null): bool
+    {
+        return (bool) $this->is_admin || $this->spatieHasPermissionTo($permission, $guardName);
+    }
+
+    public function hasAnyPermission(...$permissions): bool
+    {
+        return (bool) $this->is_admin || $this->spatieHasAnyPermission(...$permissions);
+    }
+
+    public function hasAllPermissions(...$permissions): bool
+    {
+        return (bool) $this->is_admin || $this->spatieHasAllPermissions(...$permissions);
     }
 }

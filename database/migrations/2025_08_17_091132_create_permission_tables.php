@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 return new class extends Migration
 {
@@ -110,6 +112,23 @@ return new class extends Migration
 
             $table->primary([$pivotPermission, $pivotRole], 'role_has_permissions_permission_id_role_id_primary');
         });
+
+        // Seed baseline navigation permissions and grant to the admin role
+        $guard = config('auth.defaults.guard', 'web');
+        $navigationPermissions = [
+            'navigation_item.browse',
+            'navigation_item.read',
+            'navigation_item.add',
+            'navigation_item.edit',
+            'navigation_item.delete',
+        ];
+
+        foreach ($navigationPermissions as $perm) {
+            Permission::firstOrCreate(['name' => $perm, 'guard_name' => $guard]);
+        }
+
+        $adminRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => $guard]);
+        $adminRole->givePermissionTo($navigationPermissions);
 
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
