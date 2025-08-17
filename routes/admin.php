@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\NavigationItemsController;
+use App\Http\Controllers\Admin\RolesController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])
@@ -11,4 +12,5 @@ Route::middleware(['auth', 'verified'])
         Route::redirect('/', '/admin/users')->name('home');
         Route::resource('users', UsersController::class)->except(['show']);
         Route::resource('navigation-items', NavigationItemsController::class)->except(['show']);
+        Route::resource('roles', RolesController::class);
     });
