@@ -1,23 +1,23 @@
 import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
-import PageHeader from './page-header';
-import DataTable, { TableColumn, TableAction } from './data-table';
-import Pagination from './pagination';
+import PageHeader from '@/components/admin/page-header';
+import DataTable, { TableColumn, TableAction } from '@/components/admin/data-table';
+import Pagination from '@/components/admin/pagination';
 
-interface AdminIndexLayoutProps {
+interface ListPageLayoutProps {
     title: string;
-    breadcrumbs: Array<{ title: string; href: string }>;
+    breadcrumbs: Array<{ title: string; href: string }>; 
     createUrl?: string;
     createPermission?: string;
     searchUrl: string;
     searchValue?: string;
-    data: any;
+    data: any; // paginated resource from server
     columns: TableColumn[];
     actions?: TableAction[];
     itemName?: string;
 }
 
-export default function AdminIndexLayout({
+export default function ListPageLayout({
     title,
     breadcrumbs,
     createUrl,
@@ -27,8 +27,8 @@ export default function AdminIndexLayout({
     data,
     columns,
     actions,
-    itemName = 'items'
-}: AdminIndexLayoutProps) {
+    itemName = 'items',
+}: ListPageLayoutProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={title} />

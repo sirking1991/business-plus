@@ -1,5 +1,5 @@
 import { Pencil } from 'lucide-react';
-import AdminIndexLayout from '@/components/admin/admin-index-layout';
+import ListPageLayout from '@/components/list-page-layout';
 import { TableColumn, TableAction } from '@/components/admin/data-table';
 
 export default function NavigationItemsIndex({ items, filters }: { items: any; filters?: any }) {
@@ -27,7 +27,7 @@ export default function NavigationItemsIndex({ items, filters }: { items: any; f
     ];
 
     return (
-        <AdminIndexLayout
+        <ListPageLayout
             title="Navigation"
             breadcrumbs={[{ title: 'Navigation', href: '/admin/navigation-items' }]}
             createUrl="/admin/navigation-items/create"

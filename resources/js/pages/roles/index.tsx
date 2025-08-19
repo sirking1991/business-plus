@@ -1,5 +1,5 @@
 import { Pencil } from 'lucide-react';
-import AdminIndexLayout from '@/components/admin/admin-index-layout';
+import ListPageLayout from '@/components/list-page-layout';
 import { TableColumn, TableAction } from '@/components/admin/data-table';
 
 export default function RolesIndex({ roles, filters }: { roles: any; filters?: any }) {
@@ -20,7 +20,7 @@ export default function RolesIndex({ roles, filters }: { roles: any; filters?: a
     ];
 
     return (
-        <AdminIndexLayout
+        <ListPageLayout
             title="Roles"
             breadcrumbs={[{ title: 'Roles', href: '/admin/roles' }]}
             createUrl="/admin/roles/create"
