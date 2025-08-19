@@ -35,15 +35,6 @@ return new class extends Migration
                 'sort' => 0,
                 'is_active' => true,
             ],
-            [
-                'section' => 'Administration',
-                'title' => 'Navigation',
-                'href' => '/admin/navigation-items',
-                'icon' => 'Navigation',
-                'permission' => 'navigation_item.browse',
-                'sort' => 10,
-                'is_active' => true,
-            ],
         ];
 
         foreach ($items as $data) {
