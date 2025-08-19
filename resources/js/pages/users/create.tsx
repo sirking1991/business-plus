@@ -38,7 +38,7 @@ export default function UsersCreate() {
                                 <ArrowLeft className="h-4 w-4" /> Back
                             </Button>
                             {can('user.add') && (
-                                <Button form="user-create-form" type="submit" size="sm" disabled={processing}>
+                                <Button type="button" size="sm" disabled={processing} onClick={() => post('/admin/users')}>
                                     <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save'}
                                 </Button>
                             )}
