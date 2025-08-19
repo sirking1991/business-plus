@@ -33,7 +33,12 @@ export default function UsersCreate() {
                         <ArrowLeft className="h-4 w-4" /> Back
                     </Button>
                     {can('user.add') && (
-                        <Button form="user-create-form" type="submit" size="sm" disabled={processing}>
+                        <Button
+                            type="button"
+                            size="sm"
+                            disabled={processing}
+                            onClick={() => post('/admin/users')}
+                        >
                             <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save'}
                         </Button>
                     )}
@@ -54,6 +59,7 @@ export default function UsersCreate() {
                                 <Label htmlFor="name">Name <span className="text-destructive">*</span></Label>
                                 <Input
                                     id="name"
+                                    name="name"
                                     value={data.name}
                                     onChange={(e) => setData('name', e.target.value)}
                                     placeholder="Enter full name"
@@ -69,6 +75,7 @@ export default function UsersCreate() {
                                 <Input
                                     id="email"
                                     type="email"
+                                    name="email"
                                     value={data.email}
                                     onChange={(e) => setData('email', e.target.value)}
                                     placeholder="Enter email address"
@@ -84,6 +91,7 @@ export default function UsersCreate() {
                                 <Input
                                     id="password"
                                     type="password"
+                                    name="password"
                                     value={data.password}
                                     onChange={(e) => setData('password', e.target.value)}
                                     placeholder="Enter password"
@@ -100,6 +108,7 @@ export default function UsersCreate() {
                                 <Input
                                     id="password_confirmation"
                                     type="password"
+                                    name="password_confirmation"
                                     value={data.password_confirmation}
                                     onChange={(e) => setData('password_confirmation', e.target.value)}
                                     placeholder="Confirm password"
