@@ -29,7 +29,7 @@ export default function UsersCreate() {
             subtitle="Add user information and set credentials"
             rightActions={
                 <>
-                    <Button type="button" variant="outline" size="sm" onClick={() => window.history.go(-1)}>
+                    <Button type="button" variant="outline" size="sm" onClick={() => (window.location.href = '/admin/users')}>
                         <ArrowLeft className="h-4 w-4" /> Back
                     </Button>
                     {can('user.add') && (

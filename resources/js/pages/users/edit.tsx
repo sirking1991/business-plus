@@ -47,7 +47,7 @@ export default function UsersEdit({ user, roles }: { user: any; roles: any[] }) 
                         type="button"
                         variant="outline"
                         size="sm"
-                        onClick={() => window.history.go(-1)}
+                        onClick={() => (window.location.href = '/admin/users')}
                     >
                         <ArrowLeft className="h-4 w-4" /> Back
                     </Button>
