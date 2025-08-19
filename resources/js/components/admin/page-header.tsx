@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Plus } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import useCan from '@/hooks/use-can';
 
 interface PageHeaderProps {
@@ -25,19 +25,26 @@ export default function PageHeader({
             <h1 className="text-xl font-semibold justify-self-start">{title}</h1>
 
             {/* Center: Search */}
-            <form action={searchUrl} method="get" className="flex items-center gap-2 justify-self-center w-full md:w-auto">
-                <input
-                    type="text"
-                    name="search"
-                    placeholder="Search"
-                    defaultValue={searchValue ?? ''}
-                    className="w-full md:w-80 rounded border px-2 py-1 text-center placeholder:text-center"
-                />
-                {searchValue && (
-                    <Link href={searchUrl} className="text-xs underline">
-                        Reset
-                    </Link>
-                )}
+            <form action={searchUrl} method="get" className="justify-self-center w-full md:w-auto">
+                <div className="relative w-full md:w-80">
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Search"
+                        defaultValue={searchValue ?? ''}
+                        className="w-full rounded border py-1 pl-2 pr-8 text-center placeholder:text-center"
+                    />
+                    {searchValue && (
+                        <button
+                            type="button"
+                            aria-label="Clear search"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                            onClick={() => { window.location.href = searchUrl; }}
+                        >
+                            <X className="h-4 w-4" />
+                        </button>
+                    )}
+                </div>
             </form>
 
             {/* Right: Add */}
