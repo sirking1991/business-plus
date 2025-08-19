@@ -52,7 +52,12 @@ export default function UsersEdit({ user, roles }: { user: any; roles: any[] }) 
                         <ArrowLeft className="h-4 w-4" /> Back
                     </Button>
                     {can('user.edit') && (
-                        <Button form="user-edit-form" type="submit" size="sm" disabled={processing}>
+                        <Button
+                            type="button"
+                            size="sm"
+                            disabled={processing}
+                            onClick={() => put(`/admin/users/${user.id}`)}
+                        >
                             <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save Changes'}
                         </Button>
                     )}
