@@ -82,7 +82,7 @@ export default function RolesCreate({ permissions }: { permissions: any[] }) {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="guard_name">Guard Name</Label>
+                                <Label htmlFor="guard_name" className="block">Guard Name</Label>
                                 <select
                                     id="guard_name"
                                     value={data.guard_name}
