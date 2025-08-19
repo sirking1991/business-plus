@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { Plus, X } from 'lucide-react';
 import useCan from '@/hooks/use-can';
+import { Button } from '@/components/ui/button';
 
 interface PageHeaderProps {
     title: string;
@@ -38,7 +39,7 @@ export default function PageHeader({
                         <button
                             type="button"
                             aria-label="Clear search"
-                            className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
                             onClick={() => { window.location.href = searchUrl; }}
                         >
                             <X className="h-4 w-4" />
@@ -49,12 +50,11 @@ export default function PageHeader({
 
             {/* Right: Add */}
             {createUrl && createPermission && can(createPermission) && (
-                <Link 
-                    href={createUrl} 
-                    className="inline-flex items-center gap-1 rounded border px-2 py-1 bg-primary text-primary-foreground justify-self-end"
-                >
-                    <Plus className="h-4 w-4" /> Add
-                </Link>
+                <Button asChild size="sm" className="justify-self-end">
+                    <Link href={createUrl}>
+                        <Plus className="h-4 w-4" /> Add
+                    </Link>
+                </Button>
             )}
         </div>
     );

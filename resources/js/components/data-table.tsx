@@ -1,5 +1,4 @@
 import { Link } from '@inertiajs/react';
-import { Pencil } from 'lucide-react';
 import useCan from '@/hooks/use-can';
 
 export interface TableColumn {
@@ -61,12 +60,11 @@ export default function DataTable({ columns, data, actions = [] }: DataTableProp
                                             if (action.permission && !can(action.permission)) {
                                                 return null;
                                             }
-                                            
                                             return (
                                                 <Link
                                                     key={index}
                                                     href={action.href(item)}
-                                                    className={action.className || "inline-flex items-center gap-1 rounded border px-2 py-1"}
+                                                    className={action.className || "inline-flex items-center gap-1 rounded-md border px-3 py-1.5 cursor-pointer"}
                                                 >
                                                     {action.icon} {action.label}
                                                 </Link>

@@ -1,8 +1,8 @@
 import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
-import PageHeader from '@/components/admin/page-header';
-import DataTable, { TableColumn, TableAction } from '@/components/admin/data-table';
-import Pagination from '@/components/admin/pagination';
+import PageHeader from '@/components/page-header';
+import DataTable, { TableColumn, TableAction } from '@/components/data-table';
+import Pagination from '@/components/pagination';
 
 interface ListPageLayoutProps {
     title: string;

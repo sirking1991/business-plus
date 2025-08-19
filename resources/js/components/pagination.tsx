@@ -27,9 +27,9 @@ export default function Pagination({ data, itemName = 'items' }: PaginationProps
                         href={link.url ?? '#'}
                         dangerouslySetInnerHTML={{ __html: link.label }}
                         preserveScroll
-                        className={`px-2 py-1 rounded border ${
+                        className={`px-3 py-1.5 rounded-md border cursor-pointer ${
                             link.active ? 'bg-primary text-primary-foreground' : ''
-                        } ${!link.url ? 'pointer-events-none opacity-50' : ''}`}
+                        } ${!link.url ? 'pointer-events-none opacity-50 cursor-default' : ''}`}
                     />
                 ))}
             </div>

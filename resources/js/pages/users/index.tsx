@@ -1,6 +1,6 @@
 import { Pencil } from 'lucide-react';
 import ListPageLayout from '@/components/list-page-layout';
-import { TableColumn, TableAction } from '@/components/admin/data-table';
+import { TableColumn, TableAction } from '@/components/data-table';
 
 export default function UsersIndex({ users, filters }: { users: any; filters?: any }) {
     const columns: TableColumn[] = [

@@ -1,6 +1,6 @@
 import { Pencil } from 'lucide-react';
 import ListPageLayout from '@/components/list-page-layout';
-import { TableColumn, TableAction } from '@/components/admin/data-table';
+import { TableColumn, TableAction } from '@/components/data-table';
 
 export default function RolesIndex({ roles, filters }: { roles: any; filters?: any }) {
     const columns: TableColumn[] = [
