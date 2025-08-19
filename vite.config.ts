@@ -14,12 +14,23 @@ export default defineConfig({
         react(),
         tailwindcss(),
     ],
+    server: {
+        fs: {
+            allow: [
+                // Allow dev server to import files from the package workspace
+                resolve(__dirname, 'packages'),
+                resolve(__dirname, 'resources'),
+                resolve(__dirname, 'vendor'),
+            ],
+        },
+    },
     esbuild: {
         jsx: 'automatic',
     },
     resolve: {
         alias: {
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
+            'pkg-pages': resolve(__dirname, 'packages/businessplus-module-skeleton/resources/js/pages'),
         },
     },
 });

@@ -9,7 +9,26 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => title ? `${title} - ${appName}` : appName,
-    resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx')),
+    resolve: async (name) => {
+        const normalized = name.replace(/^pkg-pages\//, '');
+        const appPages = import.meta.glob('./pages/**/*.tsx');
+        // Use a relative glob so Vite can find files without relying on alias
+        const pkgPages = import.meta.glob('../../packages/businessplus-module-skeleton/resources/js/pages/**/*.tsx');
+
+        const appKey = `./pages/${normalized}.tsx`;
+        if (appPages[appKey]) {
+            const mod: any = await appPages[appKey]!();
+            return mod.default ?? mod;
+        }
+
+        const pkgKey = Object.keys(pkgPages).find((k) => k.endsWith(`/${normalized}.tsx`));
+        if (pkgKey) {
+            const mod: any = await pkgPages[pkgKey]!();
+            return mod.default ?? mod;
+        }
+
+        throw new Error(`Page not found: ${normalized}`);
+    },
     setup({ el, App, props }) {
         const root = createRoot(el);
 

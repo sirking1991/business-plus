@@ -4,44 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6001702472f89f6997beaa0a314008a5",
+    "content-hash": "e569762ba2208c9ba660f6577f42cba9",
     "packages": [
-        {
-            "name": "bizwerks/businessplus-module-skeleton",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/businessplus-module-skeleton",
-                "reference": "364c6a09734cecbd8f087a62add4c22902e57469"
-            },
-            "require": {
-                "illuminate/support": "^12.0",
-                "inertiajs/inertia-laravel": "^2.0",
-                "php": "^8.2",
-                "spatie/laravel-permission": "^6.21"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Bizwerks\\BusinessPlus\\Modules\\ModuleSkeleton\\Providers\\ModuleServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bizwerks\\BusinessPlus\\Modules\\ModuleSkeleton\\": "src/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "description": "BusinessPlus Module Skeleton (Sales Customer example)",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
         {
             "name": "brick/math",
             "version": "0.13.1",
