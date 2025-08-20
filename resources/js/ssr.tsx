@@ -14,7 +14,8 @@ createServer((page) =>
         resolve: async (name) => {
             const normalized = name.replace(/^pkg-pages\//, '');
             const appPages = import.meta.glob('./pages/**/*.tsx');
-            const pkgPages = import.meta.glob('../../packages/businessplus-module-skeleton/resources/js/pages/**/*.tsx');
+            // Load pages from installed vendor packages (supports resource or resources folder)
+            const vendorPages = import.meta.glob('../../vendor/bizwerks/*/{resource,resources}/js/pages/**/*.tsx');
 
             const appKey = `./pages/${normalized}.tsx`;
             if (appPages[appKey]) {
@@ -22,9 +23,9 @@ createServer((page) =>
                 return mod.default ?? mod;
             }
 
-            const pkgKey = Object.keys(pkgPages).find((k) => k.endsWith(`/${normalized}.tsx`));
-            if (pkgKey) {
-                const mod: any = await pkgPages[pkgKey]!();
+            const vendorKey = Object.keys(vendorPages).find((k) => k.endsWith(`/${normalized}.tsx`));
+            if (vendorKey) {
+                const mod: any = await vendorPages[vendorKey]!();
                 return mod.default ?? mod;
             }
 
