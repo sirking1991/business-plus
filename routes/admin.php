@@ -10,5 +10,5 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::redirect('/', '/admin/users')->name('home');
         Route::resource('users', UsersController::class)->except(['show']);
-        Route::resource('roles', RolesController::class);
+        Route::resource('roles', RolesController::class)->except(['show']);
     });

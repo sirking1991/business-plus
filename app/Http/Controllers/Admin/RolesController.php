@@ -30,6 +30,7 @@ class RolesController extends Controller
                         ->orWhere('guard_name', 'like', "%{$search}%");
                 });
             })
+            ->withCount('permissions')
             ->latest('id')
             ->paginate(10)
             ->withQueryString()
@@ -37,7 +38,7 @@ class RolesController extends Controller
                 'id' => $role->id,
                 'name' => $role->name,
                 'guard_name' => $role->guard_name,
-                'permissions_count' => $role->permissions()->count(),
+                'permissions_count' => $role->permissions_count,
                 'created_at' => $role->created_at?->toDateTimeString(),
             ]);
 
@@ -57,7 +58,7 @@ class RolesController extends Controller
             'guard_name' => $permission->guard_name,
         ]);
 
-        return Inertia::render('roles/create', [
+        return Inertia::render('roles/upsert', [
             'permissions' => $permissions,
         ]);
     }
@@ -78,26 +79,6 @@ class RolesController extends Controller
         return redirect()->route('admin.roles.edit', $role)->with('success', 'Role created.');
     }
 
-    public function show(Role $role): Response
-    {
-        $role->load('permissions');
-
-        return Inertia::render('roles/show', [
-            'role' => [
-                'id' => $role->id,
-                'name' => $role->name,
-                'guard_name' => $role->guard_name,
-                'permissions' => $role->permissions->map(fn (Permission $permission) => [
-                    'id' => $permission->id,
-                    'name' => $permission->name,
-                    'guard_name' => $permission->guard_name,
-                ]),
-                'created_at' => $role->created_at?->toDateTimeString(),
-                'updated_at' => $role->updated_at?->toDateTimeString(),
-            ],
-        ]);
-    }
-
     public function edit(Role $role): Response
     {
         $role->load('permissions');
@@ -108,7 +89,7 @@ class RolesController extends Controller
             'guard_name' => $permission->guard_name,
         ]);
 
-        return Inertia::render('roles/edit', [
+        return Inertia::render('roles/upsert', [
             'role' => [
                 'id' => $role->id,
                 'name' => $role->name,

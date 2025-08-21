@@ -5,6 +5,8 @@ export interface TableColumn {
     key: string;
     label: string;
     render?: (value: any, item: any) => React.ReactNode;
+    headerClassName?: string; // optional, e.g., 'text-right'
+    className?: string; // optional, e.g., 'text-right'
 }
 
 export interface TableAction {
@@ -30,7 +32,7 @@ export default function DataTable({ columns, data, actions = [] }: DataTableProp
                 <thead className="bg-muted/50">
                     <tr>
                         {columns.map((column) => (
-                            <th key={column.key} className="px-3 py-2 text-left">
+                            <th key={column.key} className={`px-3 py-2 ${column.headerClassName ?? 'text-left'}`}>
                                 {column.label}
                             </th>
                         ))}
@@ -46,7 +48,7 @@ export default function DataTable({ columns, data, actions = [] }: DataTableProp
                             className="border-t odd:bg-white even:bg-gray-50 dark:odd:bg-zinc-900 dark:even:bg-zinc-800"
                         >
                             {columns.map((column) => (
-                                <td key={column.key} className="px-3 py-2">
+                                <td key={column.key} className={`px-3 py-2 ${column.className ?? ''}`}>
                                     {column.render 
                                         ? column.render(item[column.key], item)
                                         : item[column.key]

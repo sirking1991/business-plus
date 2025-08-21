@@ -21,9 +21,9 @@ export default function Pagination({ data, itemName = 'items' }: PaginationProps
                 Showing {data.from} to {data.to} of {data.total} {itemName}
             </div>
             <div className="flex gap-2">
-                {data.links?.map((link) => (
+                {data.links?.map((link, idx) => (
                     <Link
-                        key={link.url ?? link.label}
+                        key={idx}
                         href={link.url ?? '#'}
                         dangerouslySetInnerHTML={{ __html: link.label }}
                         preserveScroll
