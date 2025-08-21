@@ -64,19 +64,6 @@ class UsersController extends Controller
         return redirect()->route('admin.users.edit', $user)->with('success', 'User created.');
     }
 
-    public function show(User $user): Response
-    {
-        return Inertia::render('users/show', [
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'created_at' => $user->created_at?->toDateTimeString(),
-                'updated_at' => $user->updated_at?->toDateTimeString(),
-            ],
-        ]);
-    }
-
     public function edit(User $user): Response
     {
         $user->load('roles');

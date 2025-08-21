@@ -1,5 +1,5 @@
 import FormPageLayout from '@/components/form-page-layout';
-import { Form, useForm } from '@inertiajs/react';
+import { Form, useForm, router } from '@inertiajs/react';
 import useCan from '@/hooks/use-can';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
 import { ArrowLeft, Save, Trash2 } from 'lucide-react';
+import { useCallback } from 'react';
 
  type User = {
   id?: number | string;
@@ -37,20 +38,20 @@ import { ArrowLeft, Save, Trash2 } from 'lucide-react';
     roles: isEdit ? user?.roles ?? [] : [],
   });
 
-  const submit = (e: React.FormEvent) => {
+  const submit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     if (isEdit && user?.id) {
       put(`/admin/users/${user.id}`);
     } else {
       post('/admin/users');
     }
-  };
+  }, [isEdit, user?.id, put, post]);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     if (isEdit && user?.id) {
       destroy(`/admin/users/${user.id}`);
     }
-  };
+  }, [isEdit, user?.id, destroy]);
 
   return (
     <FormPageLayout
@@ -70,23 +71,21 @@ import { ArrowLeft, Save, Trash2 } from 'lucide-react';
       subtitle={isEdit ? 'Update user information and permissions' : 'Add user information and set credentials'}
       rightActions={
         <>
-          <Button type="button" variant="outline" size="sm" onClick={() => (window.location.href = '/admin/users')}>
+          <Button type="button" variant="outline" size="sm" onClick={() => router.visit('/admin/users')}>
             <ArrowLeft className="h-4 w-4" /> Back
           </Button>
 
-          {isEdit ? (
-            can('user.edit') && (
-              <Button type="button" size="sm" disabled={processing} onClick={() => user?.id && put(`/admin/users/${user.id}`)}>
-                <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save Changes'}
-              </Button>
-            )
-          ) : (
-            can('user.add') && (
-              <Button type="button" size="sm" disabled={processing} onClick={() => post('/admin/users')}>
-                <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save'}
-              </Button>
-            )
-          )}
+          {isEdit
+            ? can('user.edit') && (
+                <Button type="submit" form="user-edit-form" size="sm" disabled={processing}>
+                  <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save Changes'}
+                </Button>
+              )
+            : can('user.add') && (
+                <Button type="submit" form="user-create-form" size="sm" disabled={processing}>
+                  <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save'}
+                </Button>
+              )}
 
           {isEdit && can('user.delete') && (
             <Dialog>
