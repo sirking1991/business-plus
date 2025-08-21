@@ -51,7 +51,7 @@ class UsersController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('users/create');
+        return Inertia::render('users/upsert');
     }
 
     public function store(UserStoreRequest $request): RedirectResponse
@@ -86,7 +86,7 @@ class UsersController extends Controller
             'name' => $role->name,
         ]);
 
-        return Inertia::render('users/edit', [
+        return Inertia::render('users/upsert', [
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
