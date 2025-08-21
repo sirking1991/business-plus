@@ -4,44 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6001702472f89f6997beaa0a314008a5",
+    "content-hash": "3693bd0485895aa85e1e712b3036c3d1",
     "packages": [
-        {
-            "name": "bizwerks/businessplus-module-skeleton",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/businessplus-module-skeleton",
-                "reference": "911ef404d2584dc07e6e8b0bdc25bb11c77b6c00"
-            },
-            "require": {
-                "illuminate/support": "^12.0",
-                "inertiajs/inertia-laravel": "^2.0",
-                "php": "^8.2",
-                "spatie/laravel-permission": "^6.21"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Bizwerks\\BusinessPlus\\Modules\\ModuleSkeleton\\Providers\\ModuleServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bizwerks\\BusinessPlus\\Modules\\ModuleSkeleton\\": "src/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "description": "BusinessPlus Module Skeleton (Sales Customer example)",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
         {
             "name": "brick/math",
             "version": "0.13.1",
@@ -7178,20 +7142,20 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v3.8.3",
+            "version": "v3.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "165c879fe6e66926235d562123db206861aa6cc1"
+                "reference": "72cf695554420e21858cda831d5db193db102574"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/165c879fe6e66926235d562123db206861aa6cc1",
-                "reference": "165c879fe6e66926235d562123db206861aa6cc1",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/72cf695554420e21858cda831d5db193db102574",
+                "reference": "72cf695554420e21858cda831d5db193db102574",
                 "shasum": ""
             },
             "require": {
-                "brianium/paratest": "^7.8.3",
+                "brianium/paratest": "^7.8.4",
                 "nunomaduro/collision": "^8.8.2",
                 "nunomaduro/termwind": "^2.3.1",
                 "pestphp/pest-plugin": "^3.0.0",
@@ -7274,7 +7238,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v3.8.3"
+                "source": "https://github.com/pestphp/pest/tree/v3.8.4"
             },
             "funding": [
                 {
@@ -7286,7 +7250,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-19T10:11:21+00:00"
+            "time": "2025-08-20T19:12:42+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
