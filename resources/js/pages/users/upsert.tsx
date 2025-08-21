@@ -47,6 +47,15 @@ import { useCallback } from 'react';
     }
   }, [isEdit, user?.id, put, post]);
 
+  // Explicit save handler for header buttons (avoids relying on external form submit)
+  const handleSave = useCallback(() => {
+    if (isEdit && user?.id) {
+      put(`/admin/users/${user.id}`);
+    } else {
+      post('/admin/users');
+    }
+  }, [isEdit, user?.id, put, post]);
+
   const handleDelete = useCallback(() => {
     if (isEdit && user?.id) {
       destroy(`/admin/users/${user.id}`);
@@ -77,12 +86,12 @@ import { useCallback } from 'react';
 
           {isEdit
             ? can('user.edit') && (
-                <Button type="submit" form="user-edit-form" size="sm" disabled={processing}>
+                <Button type="button" onClick={handleSave} size="sm" disabled={processing}>
                   <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save Changes'}
                 </Button>
               )
             : can('user.add') && (
-                <Button type="submit" form="user-create-form" size="sm" disabled={processing}>
+                <Button type="button" onClick={handleSave} size="sm" disabled={processing}>
                   <Save className="h-4 w-4" /> {processing ? 'Saving…' : 'Save'}
                 </Button>
               )}
